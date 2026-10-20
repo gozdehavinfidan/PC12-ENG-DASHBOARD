@@ -1,74 +1,33 @@
 # ---------------------------------------------------------------------------
-# GitHub Pages (free tier) requires a PUBLIC repo.
-# Everything below must therefore NEVER be committed.
+# PUBLIC repository (GitHub Pages, free tier). Only the dashboard is published.
+#
+# Whitelist: ignore everything at the top level, then allow only what belongs
+# here. The local folder also holds private material (TÜSEB application,
+# thesis, decks, raw microscopy, the app) that must never be committed; with a
+# whitelist a new private file is ignored by default instead of by luck.
+# Project code and documents live in the private PC12-arch repository.
 # ---------------------------------------------------------------------------
+/*
+!/docs/
+!/README.md
+!/gantt-chart.xlsx
+!/.gitignore
+!/.gitattributes
 
-# Unpublished TUSEB grant applications - do not publish
+# Never publish these, even inside docs/
 *.pdf
-Tuseb_2025_Basvuru_Eren.pdf
-TUSEB/
-
-# Raw / labeled microscopy data (not ours to redistribute; also large)
-data/
-raw/
-masks/
-preprocessed/
+*.docx
+*.pptx
+*.czi
 *.tif
 *.tiff
-*.czi
 *.nd2
-
-# Model weights + runs
 *.pt
 *.pth
 *.onnx
 *.ckpt
-runs/
-checkpoints/
-wandb/
-
-# Python
-__pycache__/
-*.py[cod]
-.venv/
-venv/
-.ipynb_checkpoints/
 
 # OS / editor
 Thumbs.db
 desktop.ini
 .DS_Store
-.vscode/
-.idea/
-
-# Kaynak girdiler - teslim edilecek dosya degil, yayinlanmasi gerekmiyor.
-# Depo herkese acik (ucretsiz Pages public repo istiyor), o yuzden disarida.
-
-# Orijinal boy fotografi. Dashboard'un ihtiyaci olan yuze kirpilmis hali
-# docs/assets/gozde.jpg olarak zaten commit ediliyor; bu ham dosya gerekmiyor.
-gozde pp.png
-
-# Baska yerden alinan arayuz mockup'lari (telif bize ait degil, siteye de girmiyor)
-example ui.png
-example ui base.png
-
-# Yayimlanmamis TUSEB basvurusunun cozumlenmis icerigi ve ona atif yapan log.
-# Yerelde kalir (siz okursunuz), herkese acik depoya girmez.
-llm-wiki/02-BASE-PROJECT-TUSEB.md
-llm-wiki/LOG.md
-# Proje klavuzu - yayimlanmamis rapor icerigi ozetledigi icin yerele ozel (double-click ile acilir)
-KLAVUZ.html
-
-# IntelliCell app (D16) - derived from private microscopy data or rebuildable
-app/cache/
-datas/
-app/web/node_modules/
-app/dist/
-app/build/
-*.spec
-.playwright-mcp/
-
-# Local-only binaries - private microscopy images, deck and unpublished thesis (too large / not for the repo)
-PC12_resimler/
-*.pptx
-*.docx
