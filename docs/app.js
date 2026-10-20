@@ -2,7 +2,7 @@
    Plain classic script: no modules, no build step.
    Works from file:// (double-click) and from GitHub Pages.
 
-   DATA MODEL (llm-wiki/DECISIONS.md D11):
+   DATA MODEL (PC12-arch: docs/knowledge-base/decisions.md D11):
      data.js  = immutable BASELINE (window.PC12_DATA)
      data.txt = APPEND-ONLY event log; live state = baseline + events in order.
    Every event carries an id, so a retry after a lost-but-successful write can
@@ -1553,7 +1553,7 @@
       '<h4>' + esc(d.title) + '</h4></div><button class="x" id="dwClose">&times;</button></div>' +
       '<div class="dw-sec"><label>Status</label><div class="sbtns">' + btns + '</div></div>' +
       '<div class="dw-sec"><p class="hint" style="margin:0">The reasoning belongs in ' +
-        '<b>llm-wiki/DECISIONS.md</b>; this is the index.</p></div></div>';
+        '<b>docs/knowledge-base/decisions.md</b> of the PC12-arch repository; this is the index.</p></div></div>';
     $('#drawer').classList.add('open');
     $('#dwClose').onclick = closeDrawer;
     $('#drawer').querySelector('.dw-back').onclick = closeDrawer;

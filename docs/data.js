@@ -47,10 +47,9 @@ window.PC12_DATA = {
     currentWeek: 1,              // fallback only (used if w1Thursday is invalid)
     updated:     "2026-09-22",   // <-- UPDATE EVERY WEEK (YYYY-MM-DD)
     totalWeeks:  15,
-    repoUrl:     "https://github.com/gozdehavinfidan/PC12-ENG",
+    repoUrl:     "https://github.com/gozdehavinfidan/PC12-ENG-DASHBOARD",
     branch:      "main",          // whichever branch Pages serves from
     dataPath:    "docs/data.txt", // path of the event log inside the repo
-    wikiPath:    "llm-wiki",
 
     // Legacy task ids -> their current id. data.txt is append-only, so an event
     // written against an old id can never be edited; this map is how a renamed
@@ -88,7 +87,7 @@ window.PC12_DATA = {
   ],
 
   // --- WORK PACKAGES ------------------------------------------------------
-  // Mirrors the updated course Gantt (PC12_Gantt_Chartt.xlsx, "Gantt Chart"
+  // Mirrors the updated course Gantt (gantt-chart.xlsx, "Gantt Chart"
   // sheet). The chart covers W2-W15; WP0 is ours and covers W1-W2, which the
   // chart does not show. Colours live HERE, not in app.js.
   ips: [
@@ -104,7 +103,7 @@ window.PC12_DATA = {
   // --- TASKS \u2014 one per LINE ---------------------------------------------
   // IDs mirror the Gantt row numbers (WP3.2 here IS WP3.2 in the chart), so the
   // board and the chart can be read side by side without a lookup table.
-  // Exception (D18): the chart's WP2 (new data) and WP3 (model) are swapped
+  // Exception (D26): the chart's WP2 (new data) and WP3 (model) are swapped
   // here, because model development ran first - chart WP3.x = our WP2.x.
   // Rows marked [+] are OURS, added on top of the chart; every other row is a
   // 1:1 copy of a chart row, weeks included.
@@ -214,7 +213,7 @@ window.PC12_DATA = {
   risks: [],
 
   // --- DECISIONS \u2014 index only, also written from the dashboard --------
-  // The REASONING lives in llm-wiki/DECISIONS.md. This list is just the index
+  // The REASONING lives in PC12-arch: docs/knowledge-base/decisions.md. This list is just the index
   // the dashboard shows, and it is now filled in with "+ Add" rather than by
   // editing this file. D0-D15 remain in the wiki and in git history.
   decisions: [],
@@ -255,7 +254,7 @@ window.PC12_DATA = {
     { w:3, text:"IntelliCell readability pass: 12 px type floor (body 14 px), buttons 36/32 px, icon buttons 36 px, switches 46x28, icons +2 px; truncation-free layouts (NTI legend, metric cards, colormap chips, chart axes with compact ticks, responsive top bar), rectangle-tested cell badges (0 overlaps). Verified with a DOM audit (app/web/scripts/ui-audit.js) on 19 UI states x 2 themes x 1280/1440/1920: 0 tiny-text, overflow, small-target or off-centre findings; image area 70.3% at 1920x1080." },
     { w:3, text:"Model research round 2 (llm-wiki/19-MODEL-IMPROVEMENT-RESEARCH.html): 9 local-LLM literature scouts + 3 Sonnet verifiers, 131 sources (130 resolved, 0 fabricated). Recommends replacing the TÜSEB Swin trunk with an SSL-adapted DINOv2/v3 teacher distilled into an nnU-Net ResEnc/MedNeXt CPU student, geometry heads (SDF + junctions), a pre-registered topology-loss A/B, scribble labels + FM-teacher semi-supervision, a monotone EBM/GAM NTI with conformal intervals, and an offline citation-checked RAG explainer (licence-audited corpus). Proposal, not yet an ADR." },
     { w:3, text:"Dashboard primary colour changed from blue to green (8-step ramp, 500 = #1a7f53, 4.99:1 on white). Success/done moved from green to teal (#14899a) so finished work no longer reads as selected or in progress. Primary is now read from --pri-500 in app.js, so styles.css is its single source. Cache-buster v=74." },
-    { w:4, text:"D18: WP1.3 (labelling agreement) removed from the plan. WP2 and WP3 renumbered to follow the order the work actually ran: model development is now WP2 (WP2.0-WP2.5), incoming-data labelling is WP3 (WP3.1-WP3.2). For these two packages the task ids no longer match the course chart rows. Cache-buster v=75." },
+    { w:4, text:"D26: WP1.3 (labelling agreement) removed from the plan. WP2 and WP3 renumbered to follow the order the work actually ran: model development is now WP2 (WP2.0-WP2.5), incoming-data labelling is WP3 (WP3.1-WP3.2). For these two packages the task ids no longer match the course chart rows. Cache-buster v=75." },
     { w:4, text:"Existing dataset count corrected from ~70 to 91 images (WP1 description, WP1.1, WP2.0 note, W4 data card)." },
   ],
 

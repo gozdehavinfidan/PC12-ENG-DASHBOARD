@@ -1,83 +1,57 @@
-# PC12 Hücre Morfolojisi — Otomatik Analiz (ENG401)
+# PC12 Project Dashboard
 
-Görüntü işleme + derin öğrenme ile **PC12 nöronal hücrelerinin** otomatik
-morfolojik analizi: hücre sayısı, hücre alanı, nörit sayısı, nörit uzunluğu,
-nörit açısı.
+Team dashboard of the PC12 project (automated morphological analysis of PC12 cells, ENG401):
+live status, Gantt chart, task board, presentation plan, risks and the decision index.
 
-**Ekip**
-- **Gözde Havin Fidan** — Elektrik-Elektronik Müh. · yazılım / ML / dashboard
-- **Berke Dinç** — Biyomedikal Müh. · veri / biyoloji / etiketleme / doğrulama
+**Live:** https://gozdehavinfidan.github.io/PC12-ENG-DASHBOARD/
 
-Bu proje, TÜSEB **"NeuroMind"** başvurusunu (`Tuseb_2025_Basvuru_Eren.pdf`)
-**temel sürüm** kabul edip sıfırdan geliştirilmiş hâlidir. Temel sürümün
-kendisi ve nerede aştığımız `llm-wiki/02-BASE-PROJECT-TUSEB.md` ile
-`llm-wiki/10-IDEAS-STRETCH.md` içinde.
+**Local:** double-click `docs/index.html`. No install, no server, no build step.
 
----
+## Related repositories
 
-## 📊 Dashboard
+| Repository | What it holds |
+|---|---|
+| **PC12-ENG-DASHBOARD** (this one, public) | the dashboard website only |
+| [PC12-arch](https://github.com/gozdehavinfidan/PC12-arch) (private) | ML code, experiments, reports, presentations, knowledge base and decision log |
+| [camex-desktop-app](https://github.com/gozdehavinfidan/camex-desktop-app) (private) | CAMEX, the offline desktop app |
 
-**Yerel:** `docs/index.html` dosyasına çift tıklayın. Kurulum yok, sunucu yok.
+## Updating the board from the site
 
-**Yayında:** _(GitHub Pages açıldıktan sonra buraya link gelecek)_
+The site can write. Marking a task done, joining a task, adding a task or a note each appends one line
+to `docs/data.txt`. On every load the page rebuilds the state from `docs/data.js` (the baseline) plus the
+events in `docs/data.txt`, so changes survive a refresh.
 
-Canlı durum, Gantt, görev panosu, sunum planı ve risk kaydı buradadır.
+To save, click **Enter token & save** and paste a GitHub fine-grained token
+(GitHub → Settings → Developer settings → Fine-grained tokens) limited to this repository with
+**Contents: Read and write**. The token is kept in memory only while the tab is open; it is never stored
+or committed. Without a token, use **Copy lines** and paste them into `docs/data.txt` in the GitHub web
+editor.
 
-**Site yazılabilir.** Görevi tamamlandı işaretleyin, kendinizi göreve ekleyin,
-görev ekleyin, not düşün — hepsi `docs/data.txt`'ye bir satır yazar. Sayfa her
-açılışta `data.js` + `data.txt`'den durumu yeniden kurar, yani işaretlemeleriniz
-yenilemede kaybolmaz.
-
-Kaydetmek için soldaki kutudan **"Token gir ve kaydet"**. Token yalnızca o sekme
-açıkken bellekte tutulur, hiçbir yere kaydedilmez. Tokensiz isterseniz
-**"Satırları kopyala"** deyip GitHub web editöründe yapıştırın.
-Ayrıntı → `llm-wiki/09-DASHBOARD.md`, gerekçe → `llm-wiki/DECISIONS.md` D11.
-
-## 📚 llm-wiki
-
-Projenin bilgi tabanı. **Okuma sırası:**
-
-1. **`llm-wiki/00-OVERVIEW.md`** — problem, ne yapıyoruz, başarı ölçütleri
-2. **`llm-wiki/15-SMALL-DATA-STRATEGY.md`** ⭐ — **n ≈ 70 her şeyi belirliyor.**
-   04/05/06/07'den önce okunmalı.
-3. `llm-wiki/02-BASE-PROJECT-TUSEB.md` — TÜSEB temel projesinin çözümlemesi
-4. **`llm-wiki/13-SUNUM-PLAN.md`** — her sunum haftasında ne gösteriyoruz
-5. `llm-wiki/03-SEMESTER-PLAN.md` — dondurulmuş baseline plan
-6. Gerisi ihtiyaca göre → `llm-wiki/README.md` dosya haritası
-
-**Kaynak kullanırken:** ✅ `14-REFERENCES-VERIFIED.md`'den atıf yapın.
-⚠️ `12-REFERENCES.md` **doğrulanmamıştır** — içindeki arXiv numaraları, DOI'ler
-ve yazar adları kontrol edilmeden rapora girmemeli.
-
-## 🔁 Çalışma biçimi
-
-Her belirsizlik `llm-wiki/11-SEARCH-WORKFLOW.md` içindeki
-**SCOPE → SEARCH → TEST → DECIDE → LOG** döngüsüyle çözülür. İki komut hazır:
-
-| Komut | Ne yapar |
-|-------|----------|
-| `/spike <soru>` | Tek bir soru için tüm döngüyü işletir; kaynak bulur, kısıtlarımıza uyup uymadığını test eder, ADR taslağı çıkarır, log satırı yazar |
-| `/sunum` | Sunum öncesi haftalık geçiş: wiki ↔ `data.js` farkı, bayat görevler, bu haftanın iddiasına dayanak olan açık `[OPEN]`/`[VERIFY]` etiketleri |
-
-**Altın kural:** kaynağı veya kendi koşumuz olmayan hiçbir sayı yazılmaz.
-Bilinmeyen `[OPEN]` olarak işaretlenir — uydurulmaz.
-
-## 🗂 Depo yapısı
+## Layout
 
 ```
-docs/          dashboard (GitHub Pages buradan yayınlanır)
-llm-wiki/      bilgi tabanı + plan + kararlar
-.gitignore     ⚠ TÜSEB PDF'i ve ham veriyi dışarıda tutar
+docs/                      # published by GitHub Pages (branch main, folder /docs)
+├── index.html             # page shell; loads data.js, then app.js
+├── app.js                 # rendering and interaction (plain script, works from file:// too)
+├── data.js                # baseline: weeks, work packages, tasks, decisions index
+├── data.txt               # append-only event log written by the site
+├── styles.css
+├── assets/                # fonts (OFL) and a profile photo
+└── presentations/         # weekly presentation decks shown on the board (W<n>.html)
+gantt-chart.xlsx           # course Gantt chart the work packages mirror
 ```
 
-> ⚠ **Ücretsiz GitHub Pages herkese açık depo gerektirir.** İlk `git add`'den
-> önce `.gitignore`'u kontrol edin: `Tuseb_2025_Basvuru_Eren.pdf` yayımlanmamış
-> bir proje başvurusudur ve git geçmişine girdikten sonra temizlemek zordur.
-> Ham mikroskop verisi de aynı şekilde depoya girmez.
+## Editing by hand
 
-## 📅 Takvim
-| `18-PREVIOUS-FEATURES.md` | ✅ **Önceki GP2 proje (PC12 Cell Analyzer) UI envanteri (2026-09-26)** — atalay_sahan tez+pptx'ten çıkan app ekranları/görselleştirmeler; hangileri D16 IntelliCell UI'na alınacak (KEEP/IDEA/DROP + NTI param eşlemesi). |
+- Change `docs/data.js`, `docs/app.js` or `docs/styles.css` → bump the `?v=N` number in
+  `docs/index.html`, otherwise browsers and the Pages CDN keep serving the old file.
+- `docs/data.txt` is append-only: add lines, never edit or delete old ones (renamed task ids are mapped
+  in `data.js` instead).
+- The reasoning behind every design choice is in the decision log of PC12-arch
+  (`docs/knowledge-base/decisions.md`; the dashboard data model is D7 and D11).
 
-Sunum haftaları: **W2 · W4 · W6 · W9 · W11 · W13** (hepsinde sunuyoruz) ·
-**W8** vize · **W15** final.
-Her sunum için ne göstereceğimiz `llm-wiki/13-SUNUM-PLAN.md` içinde.
+## What must never be committed
+
+This repository is public. `.gitignore` is a whitelist: only `docs/`, this README, the Gantt chart and the
+git config files are tracked, so private material in the local folder (TÜSEB application, thesis, slides,
+microscopy) is ignored by default.
